@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+#TODOS
+
+- [x] Init React app
+- [x] Add router
+- [] TypeScript
+- [] Tailwind CSS
+- [] Tests
+
 ## Available Scripts
 
 In the project directory, you can run:
