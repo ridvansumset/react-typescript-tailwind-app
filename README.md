@@ -5,7 +5,7 @@
 - [x] Init React app
 - [x] Use React hooks
 - [x] Add React-Router
-- [] Use TypeScript
+- [x] Use TypeScript
 - [] Use Tailwind CSS
 - [] Write tests
 
