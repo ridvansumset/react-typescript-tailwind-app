@@ -1,14 +1,26 @@
 import React from "react";
 import { Board } from '../components';
 
-export default class Game extends React.Component {
-  constructor(props) {
+interface State {
+  history: Array<HistoryObj>,
+  step: number,
+  xIsNext: boolean,
+  winner: string | null,
+}
+
+interface HistoryObj {
+  squares: Array<string | null>,
+  point: { row: number, col: number }
+}
+
+export default class Game extends React.Component<any, State> {
+  constructor(props: any) {
     super(props);
     this.state = {
       history: [
         {
           squares: Array(9).fill(null),
-          point: { row: null, col: null },
+          point: { row: 0, col: 0 },
         }
       ],
       step: 0,
@@ -20,7 +32,7 @@ export default class Game extends React.Component {
     this.goToMove = this.goToMove.bind(this);
   }
 
-  handleClick(i) {
+  handleClick(i: number) {
     if (this.state.winner) return;
 
     const history = this.state.history.slice(0, this.state.step + 1);
@@ -47,9 +59,8 @@ export default class Game extends React.Component {
     });
   }
 
-  goToMove(step) {
+  goToMove(step: number) {
     this.setState({
-      ...this.state,
       step: step,
       xIsNext: step % 2 === 0,
       winner: null,
@@ -81,7 +92,7 @@ export default class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-          <div>Status</div>
+          <div>Moves</div>
           <ul>
             {movesList}
           </ul>
@@ -91,7 +102,7 @@ export default class Game extends React.Component {
   }
 }
 
-function calculateWinner(squares) {
+function calculateWinner(squares: Array<string | null>) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],

@@ -1,7 +1,8 @@
+import React  from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Computer(props) {
+export default function Computer() {
   const [parts] = useState(['cpu', 'gpu']);
 
   return (

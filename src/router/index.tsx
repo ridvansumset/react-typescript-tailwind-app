@@ -1,3 +1,4 @@
+import React from 'react';
 import { ErrorPage, Todos, Game, Computer, ComputerPart } from '../views';
 import { Default } from "../layouts";
 import { createBrowserRouter } from "react-router-dom";

@@ -1,3 +1,4 @@
+import React  from "react";
 import { useParams, useNavigate } from 'react-router';
 
 export default function ComputerPart() {

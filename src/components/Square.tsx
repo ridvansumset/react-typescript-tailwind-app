@@ -1,9 +1,9 @@
-import React, { MouseEventHandler, MouseEvent } from "react";
+import React  from "react";
 import { useState, useEffect } from "react";
 
-type Props = {
-  onClick: MouseEventHandler,
-  value: string,
+interface Props {
+  onClick: (a: number) => void,
+  value: string | null,
 }
 
 export default function Square(props: Props) {
@@ -13,8 +13,9 @@ export default function Square(props: Props) {
     console.log('NEW RENDER', clicked);
   }, [clicked]);
 
-  function handleClick(e: MouseEvent) {
-    props.onClick(e);
+  function handleClick() {
+    // @ts-ignore
+    props.onClick();
     setClicked(true);
   }
 

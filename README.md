@@ -1,14 +1,17 @@
-# Getting Started with Create React App
+# React-TypeScript-Tailwind-App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-#TODOS
+## TODOS
 
 - [x] Init React app
-- [x] Add router
-- [] TypeScript
-- [] Tailwind CSS
-- [] Tests
+- [x] Use React hooks
+- [x] Add React-Router
+- [] Use TypeScript
+- [] Use Tailwind CSS
+- [] Write tests
+
+## Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
