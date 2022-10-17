@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function ComputerParts(props) {
+export default function Computer(props) {
   const [parts] = useState(['cpu', 'gpu']);
 
   return (
@@ -9,7 +9,7 @@ export default function ComputerParts(props) {
       <ul>
         {parts.map((part, i) => (
           <li key={`part-${i}`}>
-            <Link to={`${part}`}>
+            <Link to={`${part}`} replace={true}>
               {part}
             </Link>
           </li>

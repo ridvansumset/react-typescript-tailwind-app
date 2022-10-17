@@ -1,11 +1,13 @@
-import Game from "./Game";
-import ComputerParts from './ComputerParts';
-import ComputerPart from "./ComputerPart";
 import ErrorPage from "./ErrorPage";
+import Game from "./Game";
+import Computer from './Computer';
+import ComputerPart from "./ComputerPart";
+import Todos from "./Todos/Todos";
 
 export {
-  Game,
-  ComputerParts,
-  ComputerPart,
   ErrorPage,
+  Game,
+  Computer,
+  ComputerPart,
+  Todos,
 };
