@@ -7,7 +7,7 @@ export default function Todos() {
     { name: 'Init React app', isDone: true },
     { name: 'Use React hooks', isDone: true },
     { name: 'Add React-Router', isDone: true },
-    { name: 'Use TypeScript', isDone: false },
+    { name: 'Use TypeScript', isDone: true },
     { name: 'Use Tailwind CSS', isDone: false },
     { name: 'Write tests', isDone: false },
   ]);
