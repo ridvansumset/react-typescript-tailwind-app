@@ -1,14 +1,20 @@
+import React, { MouseEventHandler, MouseEvent } from "react";
 import { useState, useEffect } from "react";
 
-export default function Square(props) {
+type Props = {
+  onClick: MouseEventHandler,
+  value: string,
+}
+
+export default function Square(props: Props) {
   const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     console.log('NEW RENDER', clicked);
   }, [clicked]);
 
-  function handleClick() {
-    props.onClick();
+  function handleClick(e: MouseEvent) {
+    props.onClick(e);
     setClicked(true);
   }
 
