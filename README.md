@@ -6,7 +6,7 @@
 - [x] Use React hooks
 - [x] Add React-Router
 - [x] Use TypeScript
-- [] Use Tailwind CSS
+- [x] Use Tailwind CSS
 - [] Write tests
 
 ## Getting Started with Create React App
