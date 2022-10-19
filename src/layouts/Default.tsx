@@ -9,6 +9,7 @@ export default function Default() {
     if (!darkMode || window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setDarkMode(true);
     }
+    // eslint-disable-next-line
   }, []);
 
   return (

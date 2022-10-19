@@ -71,19 +71,27 @@ export default class Game extends React.Component<any, State> {
     const currentHistory = this.state.history[this.state.step];
 
     const movesList = this.state.history.map((h, index) => (
-      <li key={index} onClick={() => this.goToMove(index)}>
+      <li
+        key={index}
+        className="border-b border-gray-400 dark:border-b-blue-200 text-lg text-slate-900 dark:text-slate-300 p-2 cursor-pointer"
+        onClick={() => this.goToMove(index)}
+      >
         {
-          `Go to index ${index}
-          ${index > 0 ?
-            `(Put ${index % 2 === 0 ? 'O' : 'X'} on row: ${h.point.row + 1} col: ${h.point.col + 1})` :
-            ''}`
+          `Go to ${index > 0 ? `move ${index}` : 'start'}`
+        }
+        {
+          index > 0
+            ? <span className="text-xs">
+                {' '}{`(${index % 2 === 0 ? 'O' : 'X'} was put on row: ${h.point.row + 1} col: ${h.point.col + 1})`}
+              </span>
+            : ''
         }
       </li>
     ));
 
     return (
-      <div className="game">
-        <div className="game-board">
+      <div className="my-4 mx-4">
+        <div className="mb-8">
           <Board
             squares={currentHistory.squares}
             winner={this.state.winner}
@@ -91,8 +99,12 @@ export default class Game extends React.Component<any, State> {
             onClick={this.handleClick}
           />
         </div>
-        <div className="game-info">
-          <div>Moves</div>
+
+        <div className="flex flex-col items-center">
+          <h3 className="text-base text-center text-slate-900 dark:text-white font-medium tracking-tight mb-2">
+            Moves
+          </h3>
+
           <ul>
             {movesList}
           </ul>
