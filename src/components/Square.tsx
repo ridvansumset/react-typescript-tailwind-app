@@ -2,7 +2,7 @@ import React  from "react";
 import { useState, useEffect } from "react";
 
 interface Props {
-  onClick: (a: number) => void,
+  onClick: () => void,
   value: string | null,
 }
 
@@ -14,7 +14,6 @@ export default function Square(props: Props) {
   }, [clicked]);
 
   function handleClick() {
-    // @ts-ignore
     props.onClick();
     setClicked(true);
   }

@@ -1,14 +1,22 @@
-import React  from "react";
-import { useParams, useNavigate } from 'react-router';
+import React from "react";
+import {useNavigate, useParams} from 'react-router';
+import {BaseButton} from '../components/';
+import {BaseButtonType} from '../constants';
 
 export default function ComputerPart() {
   const { part } = useParams();
   const navigate = useNavigate();
 
   return (
-    <>
-      <button onClick={() => navigate(-1)}>Go back</button>
+    <div>
+      <BaseButton
+        type={BaseButtonType.Secondary}
+        onClick={() => navigate(-1)}
+      >
+        {'Go back'}
+      </BaseButton>
+
       <div>{part}</div>
-    </>
+    </div>
   );
 }

@@ -20,11 +20,13 @@ export default class Board extends React.Component<Props> {
   }
 
   render() {
-    const status = this.props.winner ? `Winner is ${this.props.winner}` : `Next player: ${this.props.xIsNext ? 'X' : 'O'}`;
+    const status = this.props.winner
+      ? `Winner is ${this.props.winner}`
+      : `Next player: ${this.props.xIsNext ? 'X' : 'O'}`;
 
     return (
       <div className="flex flex-col items-center">
-        <h3 className="text-base text-center text-slate-900 dark:text-white font-medium tracking-tight mb-3">
+        <h3 className="base-txt-h3 text-center mb-2">
           {status}
         </h3>
 

@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font: 14px "Century Gothic", Futura, sans-serif;
+@layer base {
+  .base-txt-h2 {
+    @apply text-xl text-slate-900 dark:text-white font-medium;
+  }
+  .base-txt-h3 {
+    @apply text-base text-slate-900 dark:text-white font-medium;
+  }
+  .base-txt-lg {
+    @apply text-lg text-slate-900 dark:text-slate-300;
+  }
 }

@@ -90,7 +90,7 @@ export default class Game extends React.Component<any, State> {
     ));
 
     return (
-      <div className="my-4 mx-4">
+      <>
         <div className="mb-8">
           <Board
             squares={currentHistory.squares}
@@ -101,7 +101,7 @@ export default class Game extends React.Component<any, State> {
         </div>
 
         <div className="flex flex-col items-center">
-          <h3 className="text-base text-center text-slate-900 dark:text-white font-medium tracking-tight mb-2">
+          <h3 className="base-txt-h3 text-center mb-2">
             Moves
           </h3>
 
@@ -109,7 +109,7 @@ export default class Game extends React.Component<any, State> {
             {movesList}
           </ul>
         </div>
-      </div>
+      </>
     );
   }
 }

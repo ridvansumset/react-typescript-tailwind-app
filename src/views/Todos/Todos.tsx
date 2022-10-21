@@ -1,6 +1,6 @@
 import React  from "react";
 import { useState } from "react";
-import './styles.css';
+import './todos.css';
 
 export default function Todos() {
   const [todos] = useState([
@@ -29,7 +29,7 @@ export default function Todos() {
 
       return (
         <li key={`todo-${i}`} className={classes}>
-          <div className="flex items-center text-lg text-slate-900 dark:text-slate-300 p-2">
+          <div className="base-txt-lg flex items-center p-2">
             {
               todo.isDone
                 ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" className="w-5 h-5 mr-1">
@@ -38,7 +38,6 @@ export default function Todos() {
                 : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" className="w-5 h-5 mr-1">
                   <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clipRule="evenodd" />
                 </svg>
-
             }
             {todo.name}
           </div>
@@ -47,8 +46,8 @@ export default function Todos() {
     });
 
   return (
-    <div className="my-4 mx-4">
-      <h2 className="text-center mb-1 text-slate-900 dark:text-white text-base font-medium tracking-tight">
+    <>
+      <h2 className="base-txt-h2 mb-2">
         {'TODO LIST'}
       </h2>
 
@@ -57,6 +56,6 @@ export default function Todos() {
           {list}
         </ol>
       </div>
-    </div>
+    </>
   );
 }

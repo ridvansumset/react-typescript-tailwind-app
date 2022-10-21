@@ -1,7 +1,9 @@
-import Square from './Square';
+import BaseButton from "./BaseButton/BaseButton";
 import Board from './Board';
+import Square from './Square';
 
 export {
-  Square,
+  BaseButton,
   Board,
+  Square,
 };

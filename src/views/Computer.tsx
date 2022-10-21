@@ -1,21 +1,19 @@
-import React  from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useState}  from "react";
+import {Link} from "react-router-dom";
 
 export default function Computer() {
-  const [parts] = useState(['cpu', 'gpu']);
+  const [parts] = useState(['Motherboard', 'CPU', 'GPU', 'RAM']);
 
   return (
-    <div>
-      <ul>
-        {parts.map((part, i) => (
-          <li key={`part-${i}`}>
-            <Link to={`${part}`} replace={true}>
-              {part}
-            </Link>
-          </li>
+    <div className="flex justify-center">
+      <div className="grid grid-cols-2 gap-4 w-full md:w-1/2">
+        {parts.map((part) => (
+          <Link key={`${part}`} to={`${part}`} className="base-txt-lg p-8 transition ease-in-out delay-150 bg-blue-500
+          hover:-translate-y-1 hover:scale-10 hover:bg-indigo-500 duration-300">
+            {part}
+          </Link>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
