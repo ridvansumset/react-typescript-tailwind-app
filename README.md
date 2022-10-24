@@ -1,5 +1,9 @@
 # React-TypeScript-Tailwind-App
 
+This is a React project, structured like a Vue app (because Vue's project
+structure is great and it's allowed to customize project structure in React)
+and it contains many tech listed below.
+
 ## TODOS
 
 - [x] Init React app
