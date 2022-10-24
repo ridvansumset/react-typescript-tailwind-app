@@ -9,7 +9,7 @@
   .base-txt-h3 {
     @apply text-base text-slate-900 dark:text-white font-medium;
   }
-  .base-txt-lg {
-    @apply text-lg text-slate-900 dark:text-slate-300;
+  .base-txt {
+    @apply text-slate-900 dark:text-slate-300;
   }
 }
