@@ -11,6 +11,7 @@ and it contains many tech listed below.
 - [x] Add React-Router
 - [x] Use TypeScript
 - [x] Use Tailwind CSS
+- [x] Add React-Redux
 - [] Write tests
 
 ## Getting Started with Create React App

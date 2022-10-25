@@ -2,15 +2,15 @@ import React, {useEffect, useState} from "react";
 
 interface Props {
   className?: string,
-  onClick: (isDark: boolean) => void,
+  onChange: (isDark: boolean) => void,
 }
 
-export default function DarkModeButton({className, onClick}: Props) {
+export default function DarkModeButton({className, onChange}: Props) {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    onClick(darkMode);
-  }, [darkMode, onClick])
+    onChange(darkMode);
+  }, [darkMode, onChange])
 
   useEffect(() => {
     if (!darkMode || window.matchMedia('(prefers-color-scheme: dark)').matches) {

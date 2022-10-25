@@ -1,27 +1,33 @@
 import React from "react";
-import {BaseButtonType as Type} from '../../constants';
+import {BaseButtonSize as Size, BaseButtonType as Type} from '../../constants';
 import './base-button.css';
 
 interface Props {
-  type: Type,
+  type?: Type,
+  size?: Size,
   onClick: (x: any) => void,
   children: JSX.Element[] | JSX.Element | string;
 }
 
-const typeToClassName = {
-  [Type.Primary]: 'btn-primary',
-  [Type.Secondary]: 'btn-secondary',
-}
+function BaseButton({type, size, onClick, children}: Props) {
+  const sizeClass = {
+    [Size.Small]: 'text-sm px-2 py-1',
+    [Size.Medium]: 'text-md px-4 py-2',
+    [Size.Large]: 'text-2xl px-8 py-4',
+  }
 
-function BaseButton(props: Props) {
-    return (
-      <button
-        className={typeToClassName[props.type]}
-        onClick={props.onClick}
-      >
-        {props.children}
-      </button>
-    )
+  const typeClass = {
+    [Type.Primary]: 'btn-primary',
+    [Type.Secondary]: 'btn-secondary',
+  }
+
+  const className = `${sizeClass[size || Size.Medium]} ${typeClass[type || Type.Primary]}`
+
+  return (
+    <button className={className} onClick={onClick}>
+      {children}
+    </button>
+  )
 }
 
 export default BaseButton;

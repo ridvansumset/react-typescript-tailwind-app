@@ -1,12 +1,16 @@
 import React, {useState} from "react";
 import {Link} from 'react-router-dom';
-import {DarkModeButton} from '../components';
+import {useDispatch} from 'react-redux';
+import {BaseButton, DarkModeButton} from '../components';
+import {BaseButtonSize, BaseButtonType} from '../constants';
+import {authLogout} from "../reducers";
 
 interface Props {
   children?: React.ReactElement,
 }
 
 export default function Default(props: Props) {
+  const dispatch = useDispatch();
   const [dark, setDark] = useState(false);
 
   return (
@@ -19,9 +23,17 @@ export default function Default(props: Props) {
             <Link to={'tic-tac-toe'} className="base-txt">Tic Tac Toe</Link>
             <span className="base-txt">{' '}|{' '}</span>
             <Link to={'computer'} className="base-txt">Computer</Link>
+            <span className="base-txt">{' '}|{' '}</span>
+            <BaseButton
+              size={BaseButtonSize.Small}
+              type={BaseButtonType.Secondary}
+              onClick={() => dispatch(authLogout())}
+            >
+              {'Logout'}
+            </BaseButton>
           </div>
 
-          <DarkModeButton className="pr-8" onClick={(isDark) => setDark(isDark)} />
+          <DarkModeButton className="pr-8" onChange={(isDark) => setDark(isDark)} />
         </div>
 
         <div className="w-full min-h-screen flex justify-center">

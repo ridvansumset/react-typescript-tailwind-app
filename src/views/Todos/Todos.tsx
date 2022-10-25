@@ -9,6 +9,7 @@ export default function Todos() {
     { name: 'Add React-Router', isDone: true },
     { name: 'Use TypeScript', isDone: true },
     { name: 'Use Tailwind CSS', isDone: true },
+    { name: 'Add React-Redux', isDone: true },
     { name: 'Write tests', isDone: false },
   ]);
 
