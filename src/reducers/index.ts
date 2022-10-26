@@ -1,16 +1,20 @@
 import authReducer, {
+  AUTH,
   login as authLogin,
   logout as authLogout,
-  checkTokenValidity as authCheckTokenValidity,
-  selectAccessToken as authSelectAccessToken,
-  selectTokenValidity as authSelectTokenValidity,
+  getUser as authGetUser,
+  getUserThunk as authGetUserThunk,
+  selectIsLoading as authSelectIsLoading,
 } from './auth';
+import type {AuthState} from './auth';
 
 export {
   authReducer,
+  AUTH,
+  AuthState,
   authLogin,
   authLogout,
-  authCheckTokenValidity,
-  authSelectAccessToken,
-  authSelectTokenValidity,
+  authGetUser,
+  authGetUserThunk,
+  authSelectIsLoading,
 };

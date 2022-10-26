@@ -1,51 +1,53 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Outlet as RouterView, useNavigate, useLocation} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {ROUTE_PATH} from './router';
 import {Default as DefaultLayout, Login as LoginLayout} from './layouts';
 import {useSelector} from 'react-redux';
 import {
-  authCheckTokenValidity,
-  authSelectAccessToken,
-  authSelectTokenValidity,
+  AUTH,
+  AuthState,
+  authGetUser,
   authLogout,
 } from './reducers';
 import {Loading} from './components';
 
-
 export default function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {pathname: currentRoute} = useLocation();
+  let {pathname: currentRoute} = useLocation();
+  currentRoute = currentRoute.substring(1, currentRoute.length);
 
-  const isLoading = useSelector((state: any) => state.auth.isLoading);
-  const token = useSelector(authSelectAccessToken);
-  const isTokenValid = useSelector(authSelectTokenValidity);
+  const {user, accessToken} = useSelector((store: { [AUTH]: AuthState }) => store[AUTH]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (token) {
-      // @ts-ignore
-      dispatch(authCheckTokenValidity());
-    } else {
-      dispatch(authLogout());
+    async function fetchData() {
+      setIsLoading(true);
+      if (accessToken) {
+        // @ts-ignore
+        await dispatch(authGetUser());
+      } else {
+        await dispatch(authLogout());
+      }
+      setIsLoading(false);
     }
+    fetchData();
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    const route = currentRoute.substring(1, currentRoute.length);
-
-    if (isTokenValid === false && route !== ROUTE_PATH.LOGIN) {
+    if (!user && currentRoute !== ROUTE_PATH.LOGIN) {
       navigate(ROUTE_PATH.LOGIN);
-    } else if (isTokenValid && route === ROUTE_PATH.LOGIN) {
+    } else if (user && currentRoute === ROUTE_PATH.LOGIN) {
       navigate(ROUTE_PATH.HOME);
     }
-  }, [isTokenValid, currentRoute, navigate]);
+  }, [user, currentRoute, navigate]);
 
   return (
     isLoading
       ? <Loading />
-      : isTokenValid
+      : user
         ? <DefaultLayout><RouterView /></DefaultLayout>
         : <LoginLayout><RouterView /></LoginLayout>
   );
