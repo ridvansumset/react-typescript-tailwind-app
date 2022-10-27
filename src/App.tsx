@@ -1,15 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Outlet as RouterView, useNavigate, useLocation} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import {ROUTE_PATH} from './router';
+import {ROUTES} from './router';
 import {Default as DefaultLayout, Login as LoginLayout} from './layouts';
 import {useSelector} from 'react-redux';
-import {
-  AUTH,
-  AuthState,
-  authGetUser,
-  authLogout,
-} from './reducers';
+import {AUTH, AuthState, validateAccessToken} from './reducers/auth';
 import {Loading} from './components';
 
 export default function App() {
@@ -18,29 +13,25 @@ export default function App() {
   let {pathname: currentRoute} = useLocation();
   currentRoute = currentRoute.substring(1, currentRoute.length);
 
-  const {user, accessToken} = useSelector((store: { [AUTH]: AuthState }) => store[AUTH]);
+  const user = useSelector((store: { [AUTH]: AuthState }) => store[AUTH].user);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    async function fetchData() {
+    async function validate() {
       setIsLoading(true);
-      if (accessToken) {
-        // @ts-ignore
-        await dispatch(authGetUser());
-      } else {
-        await dispatch(authLogout());
-      }
+      // @ts-ignore react-redux bug
+      await dispatch(validateAccessToken());
       setIsLoading(false);
     }
-    fetchData();
+    validate();
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    if (!user && currentRoute !== ROUTE_PATH.LOGIN) {
-      navigate(ROUTE_PATH.LOGIN);
-    } else if (user && currentRoute === ROUTE_PATH.LOGIN) {
-      navigate(ROUTE_PATH.HOME);
+    if (!user && currentRoute !== ROUTES.LOGIN) {
+      navigate(ROUTES.LOGIN);
+    } else if (user && currentRoute === ROUTES.LOGIN) {
+      navigate(ROUTES.HOME);
     }
   }, [user, currentRoute, navigate]);
 

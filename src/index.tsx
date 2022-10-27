@@ -6,10 +6,11 @@ import { router } from './router';
 import { RouterProvider } from 'react-router-dom';
 import './index.css';
 
-// @ts-ignore
-ReactDOM.createRoot(document.getElementById("root")).render(
-  // <React.StrictMode></React.StrictMode>
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
-);
+const root = document.getElementById('root');
+if (root) {
+  ReactDOM.createRoot(root).render(
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
+}

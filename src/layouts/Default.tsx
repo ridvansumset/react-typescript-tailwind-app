@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import {Link} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
+import {logout} from '../reducers/auth';
 import {BaseButton, DarkModeButton} from '../components';
 import {BaseButtonSize, BaseButtonType} from '../constants';
-import {authLogout} from "../reducers";
 
 interface Props {
   children?: React.ReactElement,
@@ -31,7 +31,7 @@ export default function Default(props: Props) {
             <BaseButton
               size={BaseButtonSize.Small}
               type={BaseButtonType.Secondary}
-              onClick={() => dispatch(authLogout())}
+              onClick={() => dispatch(logout())}
             >
               {'Logout'}
             </BaseButton>

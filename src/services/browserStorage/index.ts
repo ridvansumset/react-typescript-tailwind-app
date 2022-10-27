@@ -1,13 +1,13 @@
 const ACCESS_TOKEN = 'AccessToken';
 const getKey = (key: string) => `${process.env.NODE_ENV === 'production' ? 'production' : 'development'}${key}`;
 
-interface BSS {
+interface BS {
   getAccessToken: () => string | null;
   setAccessToken: (k: string) => void;
   clearAccessToken: () => void;
 }
 
-const BrowserStorageService: BSS = {
+const BrowserStorage: BS = {
   // ACCESS TOKEN
   getAccessToken() {
     return localStorage.getItem(getKey(ACCESS_TOKEN));
@@ -20,4 +20,4 @@ const BrowserStorageService: BSS = {
   },
 };
 
-export default BrowserStorageService;
+export default BrowserStorage;

@@ -1,6 +1,6 @@
-import {router, PATH as ROUTE_PATH} from './routes';
+import {router, PATH as ROUTES} from './routes';
 
 export {
   router,
-  ROUTE_PATH,
+  ROUTES,
 };
