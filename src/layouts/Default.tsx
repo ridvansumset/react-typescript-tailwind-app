@@ -23,7 +23,11 @@ export default function Default(props: Props) {
             <Link to={'tic-tac-toe'} className="base-txt">Tic Tac Toe</Link>
             <span className="base-txt">{' '}|{' '}</span>
             <Link to={'computer'} className="base-txt">Computer</Link>
-            <span className="base-txt">{' '}|{' '}</span>
+          </div>
+
+          <div className="flex items-center pr-8">
+            <DarkModeButton className="mr-4" onChange={(isDark) => setDark(isDark)} />
+
             <BaseButton
               size={BaseButtonSize.Small}
               type={BaseButtonType.Secondary}
@@ -32,8 +36,6 @@ export default function Default(props: Props) {
               {'Logout'}
             </BaseButton>
           </div>
-
-          <DarkModeButton className="pr-8" onChange={(isDark) => setDark(isDark)} />
         </div>
 
         <div className="w-full min-h-screen flex justify-center">
