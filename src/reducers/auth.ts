@@ -32,77 +32,107 @@ const authSlice = createSlice({
       if (!state.isLoading) {
         state.isLoading = true;
       }
-    })
+    });
     builder.addCase(login.fulfilled, (state, action) => {
-      if (state.isLoading) {
-        BSS.setAccessToken(action.payload.accessToken);
-        state.user = action.payload.user;
-        state.accessToken = action.payload.accessToken;
-        state.isLoading = false;
+      const {accessToken, user} = action.payload;
+
+      if (accessToken) {
+        BSS.setAccessToken(accessToken);
       }
-    })
+
+      state.accessToken = accessToken;
+      state.user = user;
+      state.isLoading = false;
+    });
     builder.addCase(login.rejected, (state) => {
-      if (state.isLoading) {
-        state.user = null;
-        state.accessToken = null;
-        state.isLoading = false;
-      }
-    })
+      state.user = null;
+      state.accessToken = null;
+      state.isLoading = false;
+    });
     // GET USER
     builder.addCase(getUser.pending, (state) => {
       if (!state.isLoading) {
         state.isLoading = true;
       }
-    })
+    });
     builder.addCase(getUser.fulfilled, (state, action) => {
-      if (state.isLoading) {
-        state.user = action.payload;
-        state.isLoading = false;
-      }
-    })
+      state.user = action.payload;
+      state.isLoading = false;
+    });
     builder.addCase(getUser.rejected, (state) => {
       if (state.isLoading) {
+        BSS.clearAccessToken();
+        state.user = null;
+        state.accessToken = null;
         state.isLoading = false;
       }
-    })
+    });
   },
 });
 
 export const {logout} = authSlice.actions;
 
-export const login = createAsyncThunk(`${AUTH}/login`, async (payload) => {
-  console.log('payload', payload);
-  // mock api call
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+interface LoginResp {
+  data: {
+    accessToken: string;
+    user: User;
+  };
+}
+const loginCall = (payload: void) => new Promise((res, rej) => {
+  console.log('loginCall payload', payload);
 
-  // randomly decide if got error
   const gotError = Math.random() < 0.1;
-
   if (gotError) {
-    alert('couldn\'t login. try again later');
-    return {accessToken: null, user: null};
+    return setTimeout(() => rej(new Error('couldn\'t login. try again later')), 2000);
   }
-  return {accessToken: 'jwt', user: {name: 'Ridvan', email: 'ridvansumset@gmail.com'} as User};
+
+  const data = {
+    accessToken: 'jwt',
+    user: {
+      name: 'Ridvan',
+      email: 'ridvansumset@gmail.com'
+    } as User,
+  };
+
+  return setTimeout(() => res({data} as LoginResp), 2000);
+});
+export const login = createAsyncThunk(`${AUTH}/login`, async (payload) => {
+  try {
+    const resp: LoginResp = await loginCall(payload) as LoginResp;
+    return resp.data;
+  } catch (err) {
+    alert(err);
+    throw err;
+  }
 });
 
-export const getUser = createAsyncThunk(`${AUTH}/getUser`, async (_, {getState}) => {
-  // await axios.get('https://jsonplaceholder.typicode.com/users');
-
-  const store = getState()
-  // @ts-ignore
-  console.log(store[AUTH].accessToken);
-
-  // mock api call (normally, it should call getUser API with accessToken)
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-
-  // randomly decide if got error
-  const gotError = Math.random() < 0.3;
-
+interface GetUserResp {
+  data: User;
+}
+const getUserCall = (payload: void) => new Promise((res, rej) => {
+  console.log('getUserCall payload', payload);
+  const gotError = Math.random() > 0.1;
   if (gotError) {
-    alert('Session expired');
-    return null;
+    return setTimeout(() => rej(new Error('Session expired')), 2000);
   }
-  return {name: 'Ridvan', email: 'ridvansumset@gmail.com'} as User;
+
+  const data: User = {
+    name: 'Ridvan',
+    email: 'ridvansumset@gmail.com',
+  };
+
+  return setTimeout(() => res({data} as GetUserResp), 2000);
+});
+export const getUser = createAsyncThunk(`${AUTH}/getUser`, async (_, {getState}) => {
+  const store: any = getState()
+
+  try {
+    const resp: GetUserResp = await getUserCall(store[AUTH].accessToken) as GetUserResp;
+    return resp.data;
+  } catch (err) {
+    alert(err);
+    throw err;
+  }
 });
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -135,4 +165,4 @@ export const getUserThunk = () => (dispatch: any, getState: any) => {
 // in the slice file. For example: `useSelector((state) => state.auth.value)`
 export const selectIsLoading = (store: { [AUTH]: AuthState }) => store[AUTH].isLoading;
 
-export default authSlice.reducer
+export default authSlice.reducer;

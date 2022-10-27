@@ -1,9 +1,13 @@
 const ACCESS_TOKEN = 'AccessToken';
 const getKey = (key: string) => `${process.env.NODE_ENV === 'production' ? 'production' : 'development'}${key}`;
 
-type FixMeLater = any
+interface BSS {
+  getAccessToken: () => string | null;
+  setAccessToken: (k: string) => void;
+  clearAccessToken: () => void;
+}
 
-const BrowserStorageService: FixMeLater = {
+const BrowserStorageService: BSS = {
   // ACCESS TOKEN
   getAccessToken() {
     return localStorage.getItem(getKey(ACCESS_TOKEN));
