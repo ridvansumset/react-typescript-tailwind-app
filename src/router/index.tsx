@@ -1,6 +1,3 @@
 import {router, PATH as ROUTES} from './routes';
 
-export {
-  router,
-  ROUTES,
-};
+export { router, ROUTES };

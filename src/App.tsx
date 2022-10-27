@@ -10,30 +10,28 @@ import {Loading} from './components';
 export default function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let {pathname: currentRoute} = useLocation();
-  currentRoute = currentRoute.substring(1, currentRoute.length);
+  const {pathname: currentRoute} = useLocation();
 
   const user = useSelector((store: { [AUTH]: AuthState }) => store[AUTH].user);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function validate() {
-      setIsLoading(true);
+    async function validateToken() {
       // @ts-ignore react-redux bug
       await dispatch(validateAccessToken());
       setIsLoading(false);
     }
-    validate();
+    validateToken();
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    if (!user && currentRoute !== ROUTES.LOGIN) {
+    if (!user && currentRoute !== ROUTES.LOGIN && !isLoading) {
       navigate(ROUTES.LOGIN);
-    } else if (user && currentRoute === ROUTES.LOGIN) {
+    } else if (user && currentRoute === ROUTES.LOGIN && !isLoading) {
       navigate(ROUTES.HOME);
     }
-  }, [user, currentRoute, navigate]);
+  }, [user, isLoading, currentRoute, navigate]);
 
   return (
     isLoading

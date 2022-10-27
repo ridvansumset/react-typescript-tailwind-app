@@ -4,12 +4,12 @@ import {ErrorPage, Todos, Game, Computer, ComputerPart, Login} from '../views';
 import {createBrowserRouter} from "react-router-dom";
 
 export const PATH = {
-  HOME: '/',
-  GAME: 'tic-tac-toe',
-  COMPUTER: 'computer',
-  COMPUTER_PART: 'computer/:part',
-  LOGIN: 'login',
-}
+  HOME: '',
+  GAME: '/tic-tac-toe',
+  COMPUTER: '/computer',
+  COMPUTER_PART: '/computer/:part',
+  LOGIN: '/login',
+};
 
 export const router = createBrowserRouter([
   {
