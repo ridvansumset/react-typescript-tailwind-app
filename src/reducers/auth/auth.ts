@@ -1,9 +1,8 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {login, getUser} from './thunks';
 import {BrowserStorageService as BSS} from '../../services';
-import {User} from '../../models';
-
-export const AUTH = 'auth';
+import type {User, Login} from '../../models';
+import type {RootState} from '../../store'
 
 export type AuthState = {
   isLoading: boolean,
@@ -12,7 +11,7 @@ export type AuthState = {
 }
 
 const authSlice = createSlice({
-  name: AUTH,
+  name: 'auth',
   initialState: {
     isLoading: false,
     user: null,
@@ -33,7 +32,7 @@ const authSlice = createSlice({
         state.isLoading = true;
       }
     });
-    builder.addCase(login.fulfilled, (state, action) => {
+    builder.addCase(login.fulfilled, (state, action: PayloadAction<Login>) => {
       const {accessToken, user} = action.payload;
 
       if (accessToken) {
@@ -55,7 +54,7 @@ const authSlice = createSlice({
         state.isLoading = true;
       }
     });
-    builder.addCase(getUser.fulfilled, (state, action) => {
+    builder.addCase(getUser.fulfilled, (state, action: PayloadAction<User>) => {
       state.user = action.payload;
       state.isLoading = false;
     });
@@ -75,6 +74,6 @@ export const {logout} = authSlice.actions;
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.auth.value)`
-export const selectIsLoading = (store: { [AUTH]: AuthState }) => store[AUTH].isLoading;
+export const selectIsLoading = (state: RootState) => state.auth.isLoading;
 
 export default authSlice.reducer;

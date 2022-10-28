@@ -1,10 +1,7 @@
-import authReducer, {AUTH, logout, selectIsLoading} from './auth';
-import type {AuthState} from './auth';
+import authReducer, {logout, selectIsLoading} from './auth';
 import {login, getUser, validateAccessToken} from './thunks';
 
 export {
-  AUTH,
-  AuthState,
   login,
   logout,
   getUser,

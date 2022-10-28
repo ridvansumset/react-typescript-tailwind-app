@@ -1,40 +1,37 @@
 import React, {useEffect, useState} from 'react';
 import {Outlet as RouterView, useNavigate, useLocation} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useAppDispatch, useAppSelector} from './store';
 import {ROUTES} from './router';
 import {Default as DefaultLayout, Login as LoginLayout} from './layouts';
-import {useSelector} from 'react-redux';
-import {AUTH, AuthState, validateAccessToken} from './reducers/auth';
+import {validateAccessToken} from './reducers/auth';
 import {Loading} from './components';
 
 export default function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.auth.user);
   const navigate = useNavigate();
   const {pathname: currentRoute} = useLocation();
-
-  const user = useSelector((store: { [AUTH]: AuthState }) => store[AUTH].user);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isAppLoading, setIsAppLoading] = useState(true);
 
   useEffect(() => {
     async function validateToken() {
-      // @ts-ignore react-redux bug
       await dispatch(validateAccessToken());
-      setIsLoading(false);
+      setIsAppLoading(false);
     }
     validateToken();
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    if (!user && currentRoute !== ROUTES.LOGIN && !isLoading) {
+    if (!user && currentRoute !== ROUTES.LOGIN && !isAppLoading) {
       navigate(ROUTES.LOGIN);
-    } else if (user && currentRoute === ROUTES.LOGIN && !isLoading) {
+    } else if (user && currentRoute === ROUTES.LOGIN && !isAppLoading) {
       navigate(ROUTES.HOME);
     }
-  }, [user, isLoading, currentRoute, navigate]);
+  }, [user, isAppLoading, currentRoute, navigate]);
 
   return (
-    isLoading
+    isAppLoading
       ? <Loading />
       : user
         ? <DefaultLayout><RouterView /></DefaultLayout>

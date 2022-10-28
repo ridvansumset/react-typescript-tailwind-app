@@ -1,12 +1,10 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {GetUserResponse, LoginResponse} from '../../services/api';
+import type {GetUserResponse, LoginResponse} from '../../services/api';
 import {APIService as APIS} from '../../services';
-import {AuthState, logout} from './auth';
+import {logout} from './auth';
+import type {RootState} from '../../store';
 
-// TODO: use this for now since we cannot use AUTH from ./auth somehow
-const AUTH = 'auth';
-
-export const login = createAsyncThunk(`${AUTH}/login`, async (payload) => {
+export const login = createAsyncThunk('auth/login', async (payload) => {
   try {
     const { data }: LoginResponse = await APIS.loginCall(payload) as LoginResponse;
     return data;
@@ -16,7 +14,7 @@ export const login = createAsyncThunk(`${AUTH}/login`, async (payload) => {
   }
 });
 
-export const getUser = createAsyncThunk(`${AUTH}/getUser`, async (payload) => {
+export const getUser = createAsyncThunk('auth/getUser', async (payload) => {
   try {
     const { data }: GetUserResponse = await APIS.getUserCall(payload) as GetUserResponse;
     return data;
@@ -26,12 +24,12 @@ export const getUser = createAsyncThunk(`${AUTH}/getUser`, async (payload) => {
   }
 });
 
-export const validateAccessToken = createAsyncThunk(`${AUTH}/validateAccessToken`, async (_, {getState, dispatch}) => {
-  const store: { auth: AuthState } = getState() as { auth: AuthState };
+export const validateAccessToken = createAsyncThunk('auth/validateAccessToken', async (_, {getState, dispatch}) => {
+  const store: RootState = getState() as RootState;
   const accessToken = store.auth.accessToken;
 
   if (accessToken) {
-    // @ts-ignore react-redux bug
+    // @ts-ignore react-redux bug: expected 0 arguments but got 1
     await dispatch(getUser(accessToken));
   } else {
     await dispatch(logout());

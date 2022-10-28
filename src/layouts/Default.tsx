@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Link} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useAppDispatch} from '../store';
 import {logout} from '../reducers/auth';
 import {BaseButton, DarkModeButton} from '../components';
 import {BaseButtonSize, BaseButtonType} from '../constants';
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function Default(props: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [dark, setDark] = useState(false);
 
   return (
