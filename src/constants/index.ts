@@ -1,9 +1,11 @@
 import {
-  BaseButtonSize,
+  Size,
   BaseButtonType,
+  LoadingMaskType,
 } from './constants';
 
 export {
-  BaseButtonSize,
+  Size,
   BaseButtonType,
+  LoadingMaskType,
 };

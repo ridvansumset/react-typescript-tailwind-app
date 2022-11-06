@@ -27,12 +27,12 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     // LOGIN
-    builder.addCase(login.pending, (state) => {
+    builder.addCase(login.pending, (state: AuthState) => {
       if (!state.isLoading) {
         state.isLoading = true;
       }
     });
-    builder.addCase(login.fulfilled, (state, action: PayloadAction<Login>) => {
+    builder.addCase(login.fulfilled, (state: AuthState, action: PayloadAction<Login>) => {
       const {accessToken, user} = action.payload;
 
       if (accessToken) {
@@ -43,22 +43,22 @@ const authSlice = createSlice({
       state.user = user;
       state.isLoading = false;
     });
-    builder.addCase(login.rejected, (state) => {
+    builder.addCase(login.rejected, (state: AuthState) => {
       state.user = null;
       state.accessToken = null;
       state.isLoading = false;
     });
     // GET USER
-    builder.addCase(getUser.pending, (state) => {
+    builder.addCase(getUser.pending, (state: AuthState) => {
       if (!state.isLoading) {
         state.isLoading = true;
       }
     });
-    builder.addCase(getUser.fulfilled, (state, action: PayloadAction<User>) => {
+    builder.addCase(getUser.fulfilled, (state: AuthState, action: PayloadAction<User>) => {
       state.user = action.payload;
       state.isLoading = false;
     });
-    builder.addCase(getUser.rejected, (state) => {
+    builder.addCase(getUser.rejected, (state: AuthState) => {
       if (state.isLoading) {
         BSS.clearAccessToken();
         state.user = null;

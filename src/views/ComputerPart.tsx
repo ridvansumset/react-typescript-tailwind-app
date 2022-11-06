@@ -10,7 +10,7 @@ export default function ComputerPart() {
   return (
     <div>
       <BaseButton
-        type={BaseButtonType.Secondary}
+        cssType={BaseButtonType.Secondary}
         onClick={() => navigate(-1)}
       >
         {'Go back'}

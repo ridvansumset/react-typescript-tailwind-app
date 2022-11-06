@@ -1,4 +1,4 @@
-export enum BaseButtonSize {
+export enum Size {
   Small = 'sm',
   Medium = 'md',
   Large = 'lg',
@@ -9,3 +9,7 @@ export enum BaseButtonType {
   Secondary = 'secondary',
 }
 
+export enum LoadingMaskType {
+  Solid = 'solid',
+  Blur = 'blur',
+}

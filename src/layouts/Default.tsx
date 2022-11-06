@@ -1,20 +1,21 @@
-import React, {useState} from "react";
+import React from 'react';
 import {Link} from 'react-router-dom';
-import {useAppDispatch} from '../store';
+import {useAppDispatch, useAppSelector} from '../store';
 import {logout} from '../reducers/auth';
+import {selectDarkMode, updateDarkMode} from '../reducers/ui';
+import {Size, BaseButtonType} from '../constants';
 import {BaseButton, DarkModeButton} from '../components';
-import {BaseButtonSize, BaseButtonType} from '../constants';
 
 interface Props {
   children?: React.ReactElement,
 }
 
-export default function Default(props: Props) {
+export default function Default({children}: Props) {
   const dispatch = useAppDispatch();
-  const [dark, setDark] = useState(false);
+  const darkMode = useAppSelector(selectDarkMode);
 
   return (
-    <div className={dark ? 'dark' : ''}>
+    <div className={darkMode ? 'dark' : ''}>
       <div className="min-h-screen bg-apple-web dark:bg-slate-800">
         <div className="flex justify-between py-4 mb-8 border-b border-b-black dark:border-b-white">
           <div className="pl-8">
@@ -26,11 +27,14 @@ export default function Default(props: Props) {
           </div>
 
           <div className="flex items-center pr-8">
-            <DarkModeButton className="mr-4" onChange={(isDark) => setDark(isDark)} />
+            <DarkModeButton
+              className="mr-4"
+              onChange={(isDark) => dispatch(updateDarkMode(isDark))}
+            />
 
             <BaseButton
-              size={BaseButtonSize.Small}
-              type={BaseButtonType.Secondary}
+              size={Size.Small}
+              cssType={BaseButtonType.Secondary}
               onClick={() => dispatch(logout())}
             >
               {'Logout'}
@@ -40,7 +44,7 @@ export default function Default(props: Props) {
 
         <div className="w-full min-h-screen flex justify-center">
           <div className="w-full md:w-[720px] lg:w-[960px] xl:w-[1140px] 2xl:w-[1400px] px-8 md:px-0">
-            {props.children}
+            {children}
           </div>
         </div>
       </div>

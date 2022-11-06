@@ -3,14 +3,14 @@
 @layer components {
   .btn-primary {
     @apply py-1 px-4 bg-blue-500 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 focus:outline-none
-    focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+    focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 !important;
   }
   .btn-secondary {
     @apply py-1 px-4 bg-gray-500 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 focus:outline-none
-    focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75;
+    focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 !important;
   }
   .btn-disabled {
-    @apply py-1 px-4 bg-gray-400 text-white font-semibold rounded-md shadow-md hover:bg-gray-500 focus:outline-none
-    focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 hover:cursor-not-allowed;
+    @apply py-1 px-4 bg-gray-400 text-white font-semibold rounded-md shadow-md focus:outline-none
+    focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 hover:cursor-not-allowed !important;
   }
 }
