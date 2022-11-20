@@ -4,7 +4,7 @@ import {Login, User} from '../../models';
 type LoginRequest = {
   username: string;
   password: string;
-};
+}
 type LoginResponse = {
   data: Login;
 }
@@ -17,7 +17,7 @@ const API = {
   loginCall: (payload: LoginRequest) => new Promise((res, rej) => {
     const gotError = Math.random() < 0.1;
     if (gotError) {
-      return setTimeout(() => rej(new Error('couldn\'t login. try again later')), 2000);
+      return setTimeout(() => rej(new Error('couldn\'t login. try again later')), 1000);
     }
 
     const data: Login = {
@@ -28,12 +28,12 @@ const API = {
       },
     };
 
-    return setTimeout(() => res({data} as LoginResponse), 2000);
+    return setTimeout(() => res({data} as LoginResponse), 1000);
   }),
   getUserCall: (token: string) => new Promise((res, rej) => {
     const gotError = Math.random() < 0.1;
     if (gotError) {
-      return setTimeout(() => rej(new Error('Session expired')), 2000);
+      return setTimeout(() => rej(new Error('Session expired')), 1000);
     }
 
     const data: User = {
@@ -41,7 +41,7 @@ const API = {
       email: 'ridvansumset@gmail.com',
     };
 
-    return setTimeout(() => res({data} as GetUserResponse), 2000);
+    return setTimeout(() => res({data} as GetUserResponse), 1000);
   }),
 };
 

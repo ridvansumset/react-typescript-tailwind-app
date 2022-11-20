@@ -10,7 +10,7 @@ interface Props {
   children?: React.ReactElement,
 }
 
-export default function Default({children}: Props) {
+export default function Main({children}: Props) {
   const dispatch = useAppDispatch();
   const darkMode = useAppSelector(selectDarkMode);
 

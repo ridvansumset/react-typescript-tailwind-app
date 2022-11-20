@@ -5,9 +5,9 @@ import type {User, Login} from '../../models';
 import type {RootState} from '../../store'
 
 export type AuthState = {
-  isLoading: boolean,
-  user: User | null,
-  accessToken: string | null,
+  isLoading: boolean;
+  user: User | null;
+  accessToken: string | null;
 }
 
 const authSlice = createSlice({

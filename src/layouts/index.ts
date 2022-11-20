@@ -1,7 +1,7 @@
-import Default from './Default';
+import Main from './Main';
 import Login from './Login';
 
 export {
-  Default,
+  Main,
   Login,
 };

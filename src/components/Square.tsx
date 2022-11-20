@@ -1,26 +1,18 @@
 import React  from "react";
-import { useState, useEffect } from "react";
 
 interface Props {
-  onClick: () => void,
-  value: string | null,
+  onClick: () => void;
+  value: string | null;
 }
 
-export default function Square(props: Props) {
-  const [clicked, setClicked] = useState(false);
-
-  useEffect(() => {
-    console.log('NEW RENDER', clicked);
-  }, [clicked]);
-
-  function handleClick() {
-    props.onClick();
-    setClicked(true);
-  }
-
+export default function Square({value, onClick}: Props) {
   return (
-    <button className="bg-white dark:bg-slate-900 border border-black dark:border-white text-xl dark:text-slate-300 font-bold text-center outline-none p-0 w-16 h-16" onClick={handleClick}>
-      {props.value}
+    <button
+      className="bg-white dark:bg-slate-900 border border-black dark:border-white text-xl dark:text-slate-300 font-bold
+      text-center outline-none p-0 w-16 h-16"
+      onClick={onClick}
+    >
+      {value}
     </button>
   );
 }

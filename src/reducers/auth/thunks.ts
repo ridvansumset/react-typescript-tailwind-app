@@ -30,7 +30,6 @@ export const validateAccessToken = createAsyncThunk('auth/validateAccessToken', 
   const accessToken = store.auth.accessToken;
 
   if (accessToken) {
-    // @ts-ignore react-redux bug: expected 0 arguments but got 1
     await dispatch(getUser(accessToken));
   } else {
     await dispatch(logout());
