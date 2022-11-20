@@ -1,9 +1,7 @@
-import React  from "react";
-import { useState } from "react";
-import './todos.css';
+import React  from 'react';
 
 export default function Todos() {
-  const [todos] = useState([
+  const todos = [
     { name: 'Init React app', isDone: true },
     { name: 'Use React hooks', isDone: true },
     { name: 'Add React-Router', isDone: true },
@@ -11,7 +9,7 @@ export default function Todos() {
     { name: 'Use Tailwind CSS', isDone: true },
     { name: 'Add React-Redux', isDone: true },
     { name: 'Write tests', isDone: false },
-  ]);
+  ];
 
   const list = todos.map((todo, i) => {
       let classes = 'bg-gray-300 dark:bg-slate-900';

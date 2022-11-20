@@ -1,8 +1,8 @@
-import React  from "react";
+import React  from 'react';
 
 interface Props {
-  onClick: () => void;
   value: string | null;
+  onClick: () => void;
 }
 
 export default function Square({value, onClick}: Props) {

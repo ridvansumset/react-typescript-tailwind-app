@@ -1,11 +1,11 @@
-import React from "react";
-import Square from "./Square";
+import React from 'react';
+import Square from './Square';
 
 interface Props {
-    squares: Array<string | null>,
-    onClick: (a: number) => void,
-    winner: string | null,
-    xIsNext: boolean,
+    squares: Array<string | null>;
+    onClick: (a: number) => void;
+    winner: string | null;
+    xIsNext: boolean;
 }
 
 export default class Board extends React.Component<Props> {

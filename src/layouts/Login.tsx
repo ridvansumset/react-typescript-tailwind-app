@@ -27,7 +27,7 @@ export default function Default({children}: Props) {
           />
         </div>
 
-        <div className="w-full min-h-screen flex justify-center">
+        <div className="w-full flex justify-center">
           <div className="w-full md:w-[720px] lg:w-[960px] xl:w-[1140px] 2xl:w-[1400px] px-8 md:px-0">
             {children}
           </div>
